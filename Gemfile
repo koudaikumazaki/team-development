@@ -48,6 +48,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # 掲示板の一覧画面のN+1問題を解決するためにインストールしました。
+  gem 'bullet'
 end
 
 group :test do

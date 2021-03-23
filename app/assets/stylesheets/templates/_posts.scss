@@ -26,6 +26,8 @@
           & textarea {
             width: 482px;
             padding: 8px;
+            // デフォルトのcssを改変した。
+            height: 218px;
           }
         }
         &__action {
