@@ -23,27 +23,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def update
-    
-  end
-
-  def edit
-    
-  end
-  
-  def destroy
-    
-  end
-
   private
   def post_params
     params.require(:post).permit(:content, :created_at, :user_id)
   end
 
-  def permit_update_delete
-    @post = Post.find(params[:id])
-    unless user_signed_in? && @post.user_id == current_user.id
-      redirect_to root_path
-    end
-  end
 end

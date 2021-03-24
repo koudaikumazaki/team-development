@@ -1,5 +1,4 @@
 Rails.application.configure do
-  # 以下、N+1問題解決のためにgemを導入しました。
   config.after_initialize do
     Bullet.enable        = true
     Bullet.alert         = true
