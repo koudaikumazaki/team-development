@@ -1,4 +1,7 @@
-<%# フラッシュメッセージのテンプレートファイル %>
-<div class="notifications">
-  フラッシュメッセージ
-</div>
+<% flash.each do |message_type, message| %>
+  <div class="notifications">
+    <div class='alert'>
+      <%= message %>
+    </div>
+  </div>
+<% end %>
