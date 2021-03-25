@@ -38,7 +38,11 @@
                 </ul>
                 <% if user_signed_in? && current_user.id == post.user.id %>
                   <ul class="post__bottom_box__admin_actions">
-                    <li>編集</li>
+                    <li>
+                      <%= link_to edit_post_path(post) do %>
+                        編集
+                      <% end %>
+                    </li>
                     <li>削除</li>
                   </ul>
                 <% end %>
