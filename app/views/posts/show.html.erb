@@ -70,9 +70,18 @@
           <% end %>
         </ul>
       <% end %>
-      <div class="comment_area__form_box">
-        <%# コメントのフォームを設置 %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="comment_area__form_box">
+          <%= form_with(model:[@post, @comment], local: true, class:'comment_area__form_box__form') do |f| %>
+            <div class="comment_area__form_box__form__field">
+              <%= f.text_area :comment, placeholder: 'コメントを入力' %>
+            </div>
+            <div class="comment_area__form_box__form__action">
+              <%= f.submit '送信', class: 'comment_area__form_box__form__action__btn' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
