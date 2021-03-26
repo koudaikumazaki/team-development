@@ -13,6 +13,12 @@ class CommentsController < ApplicationController
     end
   end
   
+  def edit
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    @comments = @post.comments.includes([:user])
+  end
+  
   private
   
   def comment_params
