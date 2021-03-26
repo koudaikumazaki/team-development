@@ -37,7 +37,7 @@
           </ul>
           <% if user_signed_in? && current_user.id == @post.user.id %>
             <div class="post_detail__bottom_box__admin_actions">
-              <%= link_to edit_post_path do %>
+              <%= link_to edit_post_path(@post) do %>
                 編集
               <% end %>
               <%= link_to @post, data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete do %>
