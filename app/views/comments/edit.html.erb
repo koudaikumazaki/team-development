@@ -72,7 +72,7 @@
       <% end %>
       <% if user_signed_in? %>
         <div class="comment_area__form_box">
-          <%= form_with(model:[@post, @comment], url: edit_post_comment_path, local: true, class:'comment_area__form_box__form') do |f| %>
+          <%= form_with(model:[@post, @comment], local: true, class:'comment_area__form_box__form') do |f| %>
             <div class="comment_area__form_box__form__field">
               <%= f.text_area :comment, placeholder: 'コメントを入力' %>
             </div>
