@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :permit_access_edit, only: [:edit]
+  before_action :permit_update_delete, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :created_at)
   end
 
-  def permit_access_edit
+  def permit_update_delete
     @post = Post.find(params[:id])
     unless user_signed_in? && @post.user.id == current_user.id
       redirect_to root_path
