@@ -43,7 +43,7 @@
                         編集
                       <% end %>
                     </li>
-                    <li>削除</li>
+                    <li><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除して良いですか？", cancel: 'やめる', commit: '削除する' }, title: '削除確認' %></li>
                   </ul>
                 <% end %>
               </div>
