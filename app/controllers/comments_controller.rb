@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :load_post, only: [:edit, :update, :destroy]
+  before_action :load_comment, only: [:edit, :update, :destroy]
   
   def create
     @comment = current_user.comments.build(comment_params)
@@ -15,14 +17,10 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
     @comments = @post.comments.includes([:user])
   end
   
   def update
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
     @comment.assign_attributes(comment_params)
     if @comment.save
       redirect_to post_path(@post)
@@ -35,8 +33,6 @@ class CommentsController < ApplicationController
   end
   
   def destroy
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
     @comment.destroy!
     redirect_to post_path(@post)    
   end
@@ -53,6 +49,14 @@ class CommentsController < ApplicationController
       flash[:notice] = '権限がありません'
       redirect_to root_path
     end
+  end
+  
+  def load_post
+    @post = Post.find(params[:post_id])
+  end
+  
+  def load_comment
+    @comment = @post.comments.find(params[:id])
   end
 
 end
