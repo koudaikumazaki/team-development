@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
+  before_action :correct_user, only: [:edit, :update]
   
   def create
     @comment = current_user.comments.build(comment_params)
@@ -38,4 +39,13 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:comment).merge(params.permit(:post_id))
   end  
+  
+  def correct_user
+    comment = Comment.find(params[:id])
+    if current_user.id != comment.user_id
+      flash[:notice] = '権限がありません'
+      redirect_to root_path
+    end
+  end
+
 end
