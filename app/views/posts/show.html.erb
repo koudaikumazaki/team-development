@@ -28,7 +28,7 @@
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span>1</span>
+              <span><%= @comments.count %></span>
             </li>
             <li>
               <i class="far fa-heart"></i>
@@ -37,7 +37,7 @@
           </ul>
           <% if user_signed_in? && current_user.id == @post.user.id %>
             <div class="post_detail__bottom_box__admin_actions">
-              <%= link_to edit_post_path do %>
+              <%= link_to edit_post_path(@post) do %>
                 編集
               <% end %>
               <%= link_to @post, data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete do %>
@@ -49,25 +49,39 @@
       </div>
     </div>
     <div class="comment_area">
-      <ul class="comment_area__list">
-        <li class="comment_area__list__comment">
-          <div class="comment_area__list__comment__left_box">
-            <span></span>
-          </div>
-          <div class="comment_area__list__comment__right_box">
-            <div class="comment_area__list__comment__right_box__info">
-              <span>編集</span>
-              <span>削除</span>
-              <span>投稿日時：</span>
+      <% if @comments.present? %>
+        <ul class="comment_area__list">
+          <% @comments.each do |comment| %>
+            <li class="comment_area__list__comment">
+              <div class="comment_area__list__comment__left_box">
+                <span><%= comment.user.name %></span>
+              </div>
+              <div class="comment_area__list__comment__right_box">
+                <div class="comment_area__list__comment__right_box__info">
+                  <span>編集</span>
+                  <span>削除</span>
+                  <span>投稿日時：</span>
+                </div>
+                <div class="comment_area__list__comment__right_box__text">
+                  <span><%= comment.comment %></span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="comment_area__form_box">
+          <%= form_with(model:[@post, @comment], local: true, class:'comment_area__form_box__form') do |f| %>
+            <div class="comment_area__form_box__form__field">
+              <%= f.text_area :comment, placeholder: 'コメントを入力' %>
             </div>
-            <div class="comment_area__list__comment__right_box__text">
-              <span></span>
+            <div class="comment_area__form_box__form__action">
+              <%= f.submit '送信', class: 'comment_area__form_box__form__action__btn' %>
             </div>
-          </div>
-        </li>
-      </ul>
-      <div class="comment_area__form_box">
-      </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
