@@ -10,15 +10,6 @@ class Users::SessionsController < Devise::SessionsController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-  def guest_user
-    user = User.find_or_create_by!(email: 'guest2@example.com', name: 'ゲストユーザ2') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
-    end
-    sign_in user
-    redirect_to root_path, notice: 'ゲストユーザー2としてログインしました。'
-  end
-
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

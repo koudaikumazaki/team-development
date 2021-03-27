@@ -24,14 +24,8 @@
     <% else %>
       <ul class="header__bar__user_nav">
         <li class="header__bar__user_nav__btn">
-          <%= link_to users_guest_sign_in_path, method: :post do %>
-            <span>ゲストログイン</span>
-          <% end%>
         </li>
         <li class="header__bar__user_nav__btn">
-          <%= link_to users_second_guest_sign_in_path, method: :post do %>
-            <span>ゲストログイン2</span>
-          <% end %>
         </li>
         <li class="header__bar__user_nav__btn">
           <%= link_to new_user_session_path do %>
