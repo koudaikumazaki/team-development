@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+  get 'posts/show'
   root 'posts#index'
   
   devise_for :users, controllers: {
@@ -11,6 +13,6 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: [:create]
-  end
-  
+  end  
+
 end
