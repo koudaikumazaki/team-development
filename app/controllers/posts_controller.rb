@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :permit_update_delete, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments.includes([:user])
     @comment = Comment.new
   end
@@ -27,11 +27,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path
     else
@@ -40,7 +38,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to root_path
   end
@@ -51,10 +48,14 @@ class PostsController < ApplicationController
   end
 
   def permit_update_delete
-    @post = Post.find(params[:id])
+    @post= Post.find(params[:id])
     unless user_signed_in? && @post.user.id == current_user.id
       redirect_to root_path
     end
+  end
+
+  def set_post
+    @post= Post.find(params[:id])
   end
 
 end
