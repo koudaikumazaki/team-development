@@ -18,7 +18,7 @@
             <span>投稿者：<%= post.user.name %></span>
           </div>
           <div class="post_detail__top_box__name">
-            <span>投稿日時：<%= post.created_at%></span>
+            <span>投稿日時：<%= l post.created_at%></span>
           </div>
         </div>  
         <div class="post_detail__middle_box">
@@ -35,12 +35,12 @@
               <span>1</span>
             </li>
           </ul>
-          <% if user_signed_in? && current_user.id == @post.user.id %>
+          <% if user_signed_in? && current_user.id == post.user.id %>
             <div class="post_detail__bottom_box__admin_actions">
               <%= link_to edit_post_path(post) do %>
                 編集
               <% end %>
-              <%= link_to post, data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete do %>
+              <%= link_to post, data: { confirm: '本当に削除して良いですか？', cancel: 'やめる', commit: '削除する' }, title: '削除確認', method: :delete do %>
                 削除
               <% end %>
             </div>
