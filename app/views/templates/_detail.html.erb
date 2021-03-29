@@ -15,20 +15,20 @@
       <div class="post_detail">
         <div class="post_detail__top_box">
           <div class="post_detail__top_box__name">
-            <span>投稿者：<%= @post.user.name %></span>
+            <span>投稿者：<%= post.user.name %></span>
           </div>
           <div class="post_detail__top_box__name">
-            <span>投稿日時：<%= @post.created_at%></span>
+            <span>投稿日時：<%= post.created_at%></span>
           </div>
         </div>  
         <div class="post_detail__middle_box">
-          <span><%= @post.content%></span>
+          <span><%= post.content%></span>
         </div>
         <div class="post_detail__bottom_box">
           <ul class="post_detail__bottom_box__user_actions">
             <li>
               <i class="far fa-comment-alt"></i>
-              <span><%= @comments.count %></span>
+              <span><%= comments.count %></span>
             </li>
             <li>
               <i class="far fa-heart"></i>
@@ -37,10 +37,10 @@
           </ul>
           <% if user_signed_in? && current_user.id == @post.user.id %>
             <div class="post_detail__bottom_box__admin_actions">
-              <%= link_to edit_post_path(@post) do %>
+              <%= link_to edit_post_path(post) do %>
                 編集
               <% end %>
-              <%= link_to @post, data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete do %>
+              <%= link_to post, data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete do %>
                 削除
               <% end %>
             </div>
@@ -60,7 +60,7 @@
                 <div class="comment_area__list__comment__right_box__info">
                   <% if user_signed_in? && c.user_id == current_user.id %>
                     <span><%= link_to '編集', edit_post_comment_path(post,c) %></span>
-                    <span><%= link_to '削除', post_comment_path(post, c), method: 'delete', data: { confirm: '本当に削除して良いですか？' } %></span>
+                    <span><%= link_to '削除', post_comment_path(post, c), method: 'delete', data: { confirm: '本当に削除して良いですか？', cancel: 'やめる', commit: '削除する' }, title: '削除確認' %></span>
                   <% end %>
                   <span>投稿日時：<%= I18n.l(c.created_at, format: :default) %></span>
                 </div>
