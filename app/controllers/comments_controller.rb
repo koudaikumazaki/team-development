@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    @comments = @post.comments.includes([:user])
+    @comments = @post.comments.includes([:user]).order(created_at: :asc)
   end
   
   def update
