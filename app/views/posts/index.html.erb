@@ -33,7 +33,7 @@
                   </li>
                   <li>
                     <i class="far fa-heart"></i>
-                    <a href=""><span>1</span></a>
+                    <a href=""><span>@likes.count</span></a>
                   </li>
                 </ul>
                 <% if user_signed_in? && current_user.id == post.user.id %>
@@ -50,3 +50,16 @@
     </ul>
   </div>
 </div>
+
+
+
+  <li>    
+            <% if current_user.already_liked?(@post) %>              
+                <%= link_to post_like_path(@post), method: :delete do %>
+            <% else %>
+                <%= link_to post_like_path(@post) do %>
+             <% end %>
+                  <i class="far fa-heart"></i>                
+            <% end %>
+              <span>@likes.count</span>
+            </li>
