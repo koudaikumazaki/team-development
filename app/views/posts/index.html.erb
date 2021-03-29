@@ -31,10 +31,20 @@
                     <i class="far fa-comment-alt"></i>
                     <a href=""><span>1</span></a> 
                   </li>
-                  <li>
-                    <i class="far fa-heart"></i>
-                    <a href=""><span>@likes.count</span></a>
+                  <li> 
+
+                  <% if current_user.already_liked?(post) %>
+                      <%= link_to post_like_path(post_id: post.id, id: post.likes), method: :delete do %> 
+                        <i class="far fa-heart"></i>
+                           <span><%= post.likes.count %></span>       
+                      <% end %>
+                    <% else %>
+                     <%= link_to post_likes_path(post_id: post.id), method: :post do %> 
+                      <i class="far fa-heart"></i>
+                       <% end %>
+                  <span><%= post.likes.count %></span>                                      
                   </li>
+                  <% end %>
                 </ul>
                 <% if user_signed_in? && current_user.id == post.user.id %>
                   <ul class="post__bottom_box__admin_actions">
@@ -50,16 +60,3 @@
     </ul>
   </div>
 </div>
-
-
-
-  <li>    
-            <% if current_user.already_liked?(@post) %>              
-                <%= link_to post_like_path(@post), method: :delete do %>
-            <% else %>
-                <%= link_to post_like_path(@post) do %>
-             <% end %>
-                  <i class="far fa-heart"></i>                
-            <% end %>
-              <span>@likes.count</span>
-            </li>
