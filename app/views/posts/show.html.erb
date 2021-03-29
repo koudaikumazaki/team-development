@@ -32,7 +32,7 @@
             </li>
             <li>
               <i class="far fa-heart"></i>
-              <span>1</span>
+              <span>@likes.count</span>
             </li>
           </ul>
           <% if user_signed_in? && current_user.id == @post.user.id %>
