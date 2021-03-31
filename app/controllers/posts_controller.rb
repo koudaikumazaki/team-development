@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   before_action :permit_update_delete, only: [:edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-  def index      
-    @like =  Like.new    
+  def index          
     @posts = Post.all                        
   end
 
