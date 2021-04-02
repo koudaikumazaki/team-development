@@ -11,4 +11,8 @@ class User < ApplicationRecord
     self.likes.exists?(post_id: post.id)  
   end
 
+  validates :encrypted_password, length: { in: 8..32 }
+  
 end
+
+
