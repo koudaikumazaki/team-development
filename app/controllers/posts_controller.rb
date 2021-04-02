@@ -3,8 +3,8 @@ class PostsController < ApplicationController
   before_action :permit_update_delete, only: [:edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @posts = Post.all
+  def index          
+    @posts = Post.all                        
   end
 
   def show
@@ -41,6 +41,7 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to root_path
   end
+
 
   private
   def post_params
