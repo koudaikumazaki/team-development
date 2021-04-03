@@ -13,5 +13,10 @@ describe Post do
     expect(post).to be_valid        
   end
 
+  it "投稿内容が141文字の時はエラーがでること" do    
+    post = build(:post, content: "a" * 141 )
+    expect(post).to be_valid        
+  end
+  
 end
 end
