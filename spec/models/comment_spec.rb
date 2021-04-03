@@ -21,7 +21,6 @@ describe  Comment do
   it "投稿内容が141文字の時はエラーがでること" do    
     comment = build(:comment, comment: "a" * 141 )
     expect(comment).to be_valid        
-  end
-  
+  end  
 end
 end
