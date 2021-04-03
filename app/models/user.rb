@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_save { self.email = email.downcase }
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
@@ -11,4 +13,10 @@ class User < ApplicationRecord
     self.likes.exists?(post_id: post.id)  
   end
 
+  validates :password, length: { in: 8..32 }
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,32}+\z/i
+  validates :password, format: { with: VALID_PASSWORD_REGEX } 
+ 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 end
