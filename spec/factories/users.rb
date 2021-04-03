@@ -1,5 +1,5 @@
 FactoryBot.define do
-    factory :user, aliases: [:post] do
+    factory :user  do
       name                  {"sample"}
       email                 {"sample@gmail.com"}
       password              {"1234567a"}
