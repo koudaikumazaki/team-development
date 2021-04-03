@@ -10,7 +10,7 @@ describe  Comment do
 
       it "投稿がない場合は登録できないこと" do    
         comment = build(:comment, comment: "")
-        expect(comment).to be_valid        
+        expect(comment).to_not be_valid         
       end
 
       it "投稿内容が140文字以内の時は登録できること" do    
@@ -20,7 +20,7 @@ describe  Comment do
       
       it "投稿内容が141文字以上の時はエラーがでること" do    
         comment = build(:comment, comment: "a" * 141 )
-        expect(comment).to be_valid        
+        expect(comment).to_not be_valid         
       end  
   end
 end

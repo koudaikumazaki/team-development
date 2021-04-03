@@ -10,7 +10,7 @@ describe Post do
 
     it "投稿がない場合は登録できないこと" do    
       post = build(:post, content: "")
-      expect(post).to be_valid        
+      expect(post).to_not be_valid         
     end
 
     it "投稿内容が140文字以内の時は登録できること" do    
@@ -20,7 +20,7 @@ describe Post do
 
     it "投稿内容が141文字以上の時はエラーがでること" do    
       post = build(:post, content: "a" * 141 )
-      expect(post).to be_valid        
+      expect(post).to_not be_valid        
     end 
   end
 end
