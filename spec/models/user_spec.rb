@@ -35,8 +35,7 @@ describe User do
 
 
         it "メールアドレスに全角文字が含まれていると、Userが作成できないこと" do
-          user = build(:user, email: "さample@gmail.com", password: "1234567a" )      
-          # expect(user).to be_valid          
+          user = build(:user, email: "さample@gmail.com", password: "1234567a" )                   
           expect(user).to_not be_valid
         end
 
@@ -44,7 +43,12 @@ describe User do
           user = build(:user, email: "Sample@gmail.com", password: "1234567a" )      
           expect(user).to be_valid
         end
-                
+
+        it "メールアドレスがないとUserが作成できないこと" do
+          user = build(:user, email: "", password: "1234567a" )                
+          expect(user).to_not be_valid
+        end
+
         it "重複したemailが存在する場合登録できないこと" do
           user = create(:user) 
           another_user = build(:user, email: user.email) 
