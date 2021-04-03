@@ -13,12 +13,12 @@ describe  Comment do
     expect(comment).to be_valid        
   end
 
-  it "投稿内容が140文字の時は登録できること" do    
+  it "投稿内容が140文字以内の時は登録できること" do    
     comment = build(:comment, comment: "a" * 140 )
     expect(comment).to be_valid        
   end
   
-  it "投稿内容が141文字の時はエラーがでること" do    
+  it "投稿内容が141文字以上の時はエラーがでること" do    
     comment = build(:comment, comment: "a" * 141 )
     expect(comment).to be_valid        
   end  
