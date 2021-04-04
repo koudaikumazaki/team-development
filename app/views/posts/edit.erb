@@ -1,4 +1,13 @@
 <div class="post_wrapper">
+  <div class="breadcrumbs">
+    <div class="home_icon">
+      <i class="fas fa-home"></i>
+    </div>
+    <div class="breadcrumbs-list">
+      <% breadcrumb :edit_post, @post %>
+      <%= breadcrumbs separator: "&nbsp;" + "&rsaquo;" + "&nbsp;" %>
+    </div>
+  </div>
   <div class="post_wrapper__content">
     <div class="post_wrapper__content__post_form">
       <%= form_for @post do |f| %>
